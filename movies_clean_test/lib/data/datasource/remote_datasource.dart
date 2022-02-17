@@ -14,12 +14,13 @@ class MovieRemoteDataSourceImp implements MovieRemoteDataSource {
   Future<List<MovieModel>?> requestMovies() async {
     try {
       final response = await dio.get(
-        Constants.baseUrl + '/movie' + '/550',
+        Constants.baseUrl + '/movie/now_playing',
         queryParameters: {'api_key': Constants.apiKey},
       );
 
       print(response);
-      return null;
+      final movies = MovieModel.fromJsonList(response.data['results']);
+      return movies;
     } catch (e) {
       print(e);
       return null;

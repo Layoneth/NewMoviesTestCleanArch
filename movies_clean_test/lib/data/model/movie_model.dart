@@ -42,6 +42,14 @@ class MovieModel extends Equatable{
 
     String toJson() => json.encode(toMap());
 
+    static List<MovieModel> fromJsonList(List<dynamic> jsonList) {
+      List<MovieModel> movies = [];
+      for (var json in jsonList) {
+        movies.add(MovieModel.fromMap(json));
+      }
+      return movies;
+    }
+
     factory MovieModel.fromMap(Map<String, dynamic> json) => MovieModel(
         posterPath: json["poster_path"],
         adult: json["adult"],

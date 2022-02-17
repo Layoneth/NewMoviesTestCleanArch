@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_clean_test/core/constants.dart';
 import 'package:movies_clean_test/data/model/movie_model.dart';
 
 class BodyDetailMovie extends StatelessWidget {
@@ -37,7 +38,9 @@ class MinInformation extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
             child: FadeInImage(
               placeholder: NetworkImage(movie.posterPath), 
-              image: NetworkImage(movie.posterPath),
+              image: NetworkImage(
+                Constants.posterPath + movie.posterPath
+              ),
             ),
           ),
         ),
