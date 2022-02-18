@@ -13,35 +13,37 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Welcome to Layos test'),
+      ),
       body: BlocBuilder<GetMoviesCubit, GetMoviesState>(
         builder: (context, state) {
           if (state is GetMoviesLoaded) {
-            final list = state.movieList;
+            final movielist = state.movieList;
+
             return Swiper(
-              itemCount: list.length,
+              itemCount: movielist.length,
               itemWidth: MediaQuery.of(context).size.width,
-              itemHeight: MediaQuery.of(context).size.height * 0.80,
-              layout: SwiperLayout.TINDER,
+              itemHeight: MediaQuery.of(context).size.height,
+              layout: SwiperLayout.DEFAULT,
+              pagination: const SwiperPagination(),
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => MovieDetailPage(
-                        movie: list.elementAt(index),
+                        movie: movielist.elementAt(index),
                       ))),
                   child: Hero(
-                    tag: list.elementAt(index).title,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: FadeInImage(
-                        fit: BoxFit.fill,
-                        placeholder: const NetworkImage(
-                          Constants.placeholderUrl,
-                        ),
-                        image: NetworkImage(
-                          Constants.posterPath + list.elementAt(index).posterPath,
-                        ),
+                    tag: movielist.elementAt(index).title,
+                    child: FadeInImage(
+                      fit: BoxFit.fill,
+                      placeholder: const NetworkImage(
+                        Constants.placeholderUrl,
+                      ),
+                      image: NetworkImage(
+                        Constants.posterPath + movielist.elementAt(index).posterPath,
                       ),
                     ),
                   ),
